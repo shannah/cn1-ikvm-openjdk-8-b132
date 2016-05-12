@@ -1584,6 +1584,11 @@ public abstract class Calendar implements Serializable, Cloneable, Comparable<Ca
         sharedZone = true;
     }
 
+    protected Calendar(boolean bool) {
+        // This is a dummy method used to prevent loading all the timzeone stuff when
+        // overriding Calendar with our own implementation
+    }
+    
     /**
      * Constructs a calendar with the specified time zone and locale.
      *
@@ -1610,7 +1615,8 @@ public abstract class Calendar implements Serializable, Cloneable, Comparable<Ca
      */
     public static Calendar getInstance()
     {
-        return createCalendar(TimeZone.getDefault(), Locale.getDefault(Locale.Category.FORMAT));
+        return com.codename1.java.util.Calendar.getInstance();
+        //return createCalendar(TimeZone.getDefault(), Locale.getDefault(Locale.Category.FORMAT));
     }
 
     /**
@@ -1624,7 +1630,11 @@ public abstract class Calendar implements Serializable, Cloneable, Comparable<Ca
      */
     public static Calendar getInstance(TimeZone zone)
     {
+        if (zone instanceof com.codename1.java.util.TimeZone) {
+            return com.codename1.java.util.Calendar.getInstance((com.codename1.java.util.TimeZone)zone);
+        }
         return createCalendar(zone, Locale.getDefault(Locale.Category.FORMAT));
+        
     }
 
     /**
@@ -1751,7 +1761,7 @@ public abstract class Calendar implements Serializable, Cloneable, Comparable<Ca
      * @see #setTime(Date)
      * @see #getTimeInMillis()
      */
-    public final Date getTime() {
+    public Date getTime() {
         return new Date(getTimeInMillis());
     }
 
@@ -1766,7 +1776,7 @@ public abstract class Calendar implements Serializable, Cloneable, Comparable<Ca
      * @see #getTime()
      * @see #setTimeInMillis(long)
      */
-    public final void setTime(Date date) {
+    public void setTime(Date date) {
         setTimeInMillis(date.getTime());
     }
 
@@ -2755,7 +2765,9 @@ public abstract class Calendar implements Serializable, Cloneable, Comparable<Ca
      * @see #roll(int,int)
      * @see #set(int,int)
      */
-    abstract public void add(int field, int amount);
+     public void add(int field, int amount) {
+         throw new UnsupportedOperationException();
+     }
 
     /**
      * Adds or subtracts (up/down) a single unit of time on the given time
@@ -2777,7 +2789,9 @@ public abstract class Calendar implements Serializable, Cloneable, Comparable<Ca
      * @see Calendar#add(int,int)
      * @see Calendar#set(int,int)
      */
-    abstract public void roll(int field, boolean up);
+     public void roll(int field, boolean up) {
+         throw new UnsupportedOperationException();
+     }
 
     /**
      * Adds the specified (signed) amount to the specified calendar field
@@ -3064,7 +3078,9 @@ public abstract class Calendar implements Serializable, Cloneable, Comparable<Ca
      * @see #getActualMinimum(int)
      * @see #getActualMaximum(int)
      */
-    abstract public int getMinimum(int field);
+    public int getMinimum(int field) {
+        throw new UnsupportedOperationException();
+    }
 
     /**
      * Returns the maximum value for the given calendar field of this
@@ -3081,7 +3097,9 @@ public abstract class Calendar implements Serializable, Cloneable, Comparable<Ca
      * @see #getActualMinimum(int)
      * @see #getActualMaximum(int)
      */
-    abstract public int getMaximum(int field);
+    public int getMaximum(int field) {
+        throw new UnsupportedOperationException();
+    }
 
     /**
      * Returns the highest minimum value for the given calendar field
@@ -3099,7 +3117,10 @@ public abstract class Calendar implements Serializable, Cloneable, Comparable<Ca
      * @see #getActualMinimum(int)
      * @see #getActualMaximum(int)
      */
-    abstract public int getGreatestMinimum(int field);
+    public int getGreatestMinimum(int field) {
+        throw new UnsupportedOperationException();
+    }
+    
 
     /**
      * Returns the lowest maximum value for the given calendar field
@@ -3121,7 +3142,9 @@ public abstract class Calendar implements Serializable, Cloneable, Comparable<Ca
      * @see #getActualMinimum(int)
      * @see #getActualMaximum(int)
      */
-    abstract public int getLeastMaximum(int field);
+    public int getLeastMaximum(int field) {
+        throw new UnsupportedOperationException();
+    }
 
     /**
      * Returns the minimum value that the specified calendar field

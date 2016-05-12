@@ -481,7 +481,7 @@ import sun.util.locale.provider.ResourceBundleBasedAdapter;
  * @author Mark Davis
  * @since 1.1
  */
-public final class Locale implements Cloneable, Serializable {
+public class Locale implements Cloneable, Serializable {
 
     static private final  Cache LOCALECACHE = new Cache();
 
@@ -617,6 +617,8 @@ public final class Locale implements Cloneable, Serializable {
         this.localeExtensions = extensions;
     }
 
+    protected Locale(boolean b){}
+    
     /**
      * Construct a locale from language, country and variant.
      * This constructor normalizes the language value to lowercase and
@@ -644,12 +646,14 @@ public final class Locale implements Cloneable, Serializable {
      * @exception NullPointerException thrown if any argument is null.
      */
     public Locale(String language, String country, String variant) {
-        if (language== null || country == null || variant == null) {
-            throw new NullPointerException();
-        }
-        baseLocale = BaseLocale.getInstance(convertOldISOCodes(language), "", country, variant);
-        localeExtensions = getCompatibilityExtensions(language, "", country, variant);
+        //if (language== null || country == null || variant == null) {
+        //    throw new NullPointerException();
+        //}
+        //baseLocale = BaseLocale.getInstance(convertOldISOCodes(language), "", country, variant);
+        //localeExtensions = getCompatibilityExtensions(language, "", country, variant);
     }
+    
+    
 
     /**
      * Construct a locale from language and country.
@@ -674,7 +678,7 @@ public final class Locale implements Cloneable, Serializable {
      * @exception NullPointerException thrown if either argument is null.
      */
     public Locale(String language, String country) {
-        this(language, country, "");
+        //this(language, country, "");
     }
 
     /**
@@ -698,7 +702,7 @@ public final class Locale implements Cloneable, Serializable {
      * @since 1.4
      */
     public Locale(String language) {
-        this(language, "", "");
+        //this(language, "", "");
     }
 
     /**
@@ -706,8 +710,9 @@ public final class Locale implements Cloneable, Serializable {
      * constants due to making shortcuts.
      */
     private static Locale createConstant(String lang, String country) {
-        BaseLocale base = BaseLocale.createInstance(lang, country);
-        return getInstance(base, null);
+        //BaseLocale base = BaseLocale.createInstance(lang, country);
+        //return getInstance(base, null);
+        return com.codename1.java.util.Locale.getDefault();
     }
 
     /**
@@ -812,7 +817,8 @@ public final class Locale implements Cloneable, Serializable {
      */
     public static Locale getDefault() {
         // do not synchronize this method - see 4071298
-        return defaultLocale;
+        //return defaultLocale;
+        return com.codename1.java.util.Locale.getDefault();
     }
 
     /**
@@ -832,6 +838,7 @@ public final class Locale implements Cloneable, Serializable {
      * @since 1.7
      */
     public static Locale getDefault(Locale.Category category) {
+        /*
         // do not synchronize this method - see 4071298
         switch (category) {
         case DISPLAY:
@@ -854,7 +861,7 @@ public final class Locale implements Cloneable, Serializable {
             return defaultFormatLocale;
         default:
             assert false: "Unknown Category";
-        }
+        }*/
         return getDefault();
     }
 
@@ -930,9 +937,9 @@ public final class Locale implements Cloneable, Serializable {
      * @see java.util.PropertyPermission
      */
     public static synchronized void setDefault(Locale newLocale) {
-        setDefault(Category.DISPLAY, newLocale);
-        setDefault(Category.FORMAT, newLocale);
-        defaultLocale = newLocale;
+        //setDefault(Category.DISPLAY, newLocale);
+        //setDefault(Category.FORMAT, newLocale);
+        //defaultLocale = newLocale;
     }
 
     /**
@@ -965,6 +972,7 @@ public final class Locale implements Cloneable, Serializable {
      */
     public static synchronized void setDefault(Locale.Category category,
         Locale newLocale) {
+        /*
         if (category == null)
             throw new NullPointerException("Category cannot be NULL");
         if (newLocale == null)
@@ -983,6 +991,7 @@ public final class Locale implements Cloneable, Serializable {
         default:
             assert false: "Unknown Category";
         }
+        */
     }
 
     /**
@@ -996,7 +1005,8 @@ public final class Locale implements Cloneable, Serializable {
      * @return An array of installed locales.
      */
     public static Locale[] getAvailableLocales() {
-        return LocaleServiceProviderPool.getAllAvailableLocales();
+        //return LocaleServiceProviderPool.getAllAvailableLocales();
+        return new Locale[]{getDefault()};
     }
 
     /**
@@ -1073,7 +1083,8 @@ public final class Locale implements Cloneable, Serializable {
      * @see #getDisplayLanguage
      */
     public String getLanguage() {
-        return baseLocale.getLanguage();
+        //return baseLocale.getLanguage();
+        return com.codename1.java.util.Locale.getDefault().getLanguage();
     }
 
     /**
@@ -1099,7 +1110,8 @@ public final class Locale implements Cloneable, Serializable {
      * @see #getDisplayCountry
      */
     public String getCountry() {
-        return baseLocale.getRegion();
+        //return baseLocale.getRegion();
+        return com.codename1.java.util.Locale.getDefault().getCountry();
     }
 
     /**
