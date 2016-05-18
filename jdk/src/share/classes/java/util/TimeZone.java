@@ -514,7 +514,7 @@ abstract public class TimeZone implements Serializable, Cloneable {
      */
     public static synchronized TimeZone getTimeZone(String ID) {
         //return getTimeZone(ID, true);
-        return com.codename1.java.util.TimeZone.getTimeZone(ID);
+        return com.codename1.java0.util.TimeZone.getTimeZone(ID);
     }
 
     /**
@@ -578,7 +578,7 @@ abstract public class TimeZone implements Serializable, Cloneable {
      * @see #getRawOffset()
      */
     public static synchronized String[] getAvailableIDs(int rawOffset) {
-        return com.codename1.java.util.TimeZone.getAvailableIDs(rawOffset);
+        return com.codename1.java0.util.TimeZone.getAvailableIDs(rawOffset);
     }
 
     /**
@@ -587,7 +587,7 @@ abstract public class TimeZone implements Serializable, Cloneable {
      */
     public static synchronized String[] getAvailableIDs() {
         //return ZoneInfo.getAvailableIDs();
-        return com.codename1.java.util.TimeZone.getAvailableIDs();
+        return com.codename1.java0.util.TimeZone.getAvailableIDs();
     }
 
     /**
@@ -626,7 +626,7 @@ abstract public class TimeZone implements Serializable, Cloneable {
      */
     public static TimeZone getDefault() {
         //return (TimeZone) getDefaultRef().clone();
-        return com.codename1.java.util.TimeZone.getDefault();
+        return com.codename1.java0.util.TimeZone.getDefault();
     }
 
     /**

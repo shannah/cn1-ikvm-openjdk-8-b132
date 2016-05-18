@@ -1615,7 +1615,7 @@ public abstract class Calendar implements Serializable, Cloneable, Comparable<Ca
      */
     public static Calendar getInstance()
     {
-        return com.codename1.java.util.Calendar.getInstance();
+        return com.codename1.java0.util.Calendar.getInstance();
         //return createCalendar(TimeZone.getDefault(), Locale.getDefault(Locale.Category.FORMAT));
     }
 
@@ -1630,8 +1630,8 @@ public abstract class Calendar implements Serializable, Cloneable, Comparable<Ca
      */
     public static Calendar getInstance(TimeZone zone)
     {
-        if (zone instanceof com.codename1.java.util.TimeZone) {
-            return com.codename1.java.util.Calendar.getInstance((com.codename1.java.util.TimeZone)zone);
+        if (zone instanceof com.codename1.java0.util.TimeZone) {
+            return com.codename1.java0.util.Calendar.getInstance((com.codename1.java0.util.TimeZone)zone);
         }
         return createCalendar(zone, Locale.getDefault(Locale.Category.FORMAT));
         

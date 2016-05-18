@@ -712,7 +712,7 @@ public class Locale implements Cloneable, Serializable {
     private static Locale createConstant(String lang, String country) {
         //BaseLocale base = BaseLocale.createInstance(lang, country);
         //return getInstance(base, null);
-        return com.codename1.java.util.Locale.getDefault();
+        return com.codename1.java0.util.Locale.getDefault();
     }
 
     /**
@@ -818,7 +818,7 @@ public class Locale implements Cloneable, Serializable {
     public static Locale getDefault() {
         // do not synchronize this method - see 4071298
         //return defaultLocale;
-        return com.codename1.java.util.Locale.getDefault();
+        return com.codename1.java0.util.Locale.getDefault();
     }
 
     /**
@@ -1084,7 +1084,7 @@ public class Locale implements Cloneable, Serializable {
      */
     public String getLanguage() {
         //return baseLocale.getLanguage();
-        return com.codename1.java.util.Locale.getDefault().getLanguage();
+        return com.codename1.java0.util.Locale.getDefault().getLanguage();
     }
 
     /**
@@ -1111,7 +1111,7 @@ public class Locale implements Cloneable, Serializable {
      */
     public String getCountry() {
         //return baseLocale.getRegion();
-        return com.codename1.java.util.Locale.getDefault().getCountry();
+        return com.codename1.java0.util.Locale.getDefault().getCountry();
     }
 
     /**
