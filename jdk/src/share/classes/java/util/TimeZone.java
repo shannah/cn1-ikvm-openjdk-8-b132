@@ -312,8 +312,9 @@ abstract public class TimeZone implements Serializable, Cloneable {
      * @see Locale.Category
      */
     public final String getDisplayName() {
-        return getDisplayName(false, LONG,
-                              Locale.getDefault(Locale.Category.DISPLAY));
+        return getDefault().getID();
+        //return getDisplayName(false, LONG,
+        //                      Locale.getDefault(Locale.Category.DISPLAY));
     }
 
     /**
@@ -360,8 +361,9 @@ abstract public class TimeZone implements Serializable, Cloneable {
      * @see java.text.DateFormatSymbols#getZoneStrings()
      */
     public final String getDisplayName(boolean daylight, int style) {
-        return getDisplayName(daylight, style,
-                              Locale.getDefault(Locale.Category.DISPLAY));
+        return getDefault().getID();
+        //return getDisplayName(daylight, style,
+        //                      Locale.getDefault(Locale.Category.DISPLAY));
     }
 
     /**
@@ -393,6 +395,7 @@ abstract public class TimeZone implements Serializable, Cloneable {
      * @see java.text.DateFormatSymbols#getZoneStrings()
      */
     public String getDisplayName(boolean daylight, int style, Locale locale) {
+        /*
         if (style != SHORT && style != LONG) {
             throw new IllegalArgumentException("Illegal style: " + style);
         }
@@ -413,10 +416,12 @@ abstract public class TimeZone implements Serializable, Cloneable {
             offset += getDSTSavings();
         }
         return ZoneInfoFile.toCustomID(offset);
+        */
+        return getDefault().getID();
     }
 
     private static String[] getDisplayNames(String id, Locale locale) {
-        return TimeZoneNameUtility.retrieveDisplayNames(id, locale);
+        return new String[]{id};
     }
 
     /**
@@ -634,7 +639,7 @@ abstract public class TimeZone implements Serializable, Cloneable {
      * method doesn't create a clone.
      */
     static TimeZone getDefaultRef() {
-        TimeZone defaultZone = defaultTimeZone;
+        TimeZone defaultZone = getDefault();
         if (defaultZone == null) {
             // Need to initialize the default time zone.
             defaultZone = setDefaultZone();
