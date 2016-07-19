@@ -68,55 +68,7 @@ class KrbServiceLocator {
      *          the service has not been located.
      */
     static String[] getKerberosService(String realmName) {
-
-        // search realm in SRV TXT records
-        String dnsUrl = "dns:///_kerberos." + realmName;
-        String[] records = null;
-        try {
-            // Create the DNS context using NamingManager rather than using
-            // the initial context constructor. This avoids having the initial
-            // context constructor call itself (when processing the URL
-            // argument in the getAttributes call).
-            Context ctx = NamingManager.getURLContext("dns", new Hashtable<>(0));
-            if (!(ctx instanceof DirContext)) {
-                return null; // cannot create a DNS context
-            }
-            Attributes attrs =
-                ((DirContext)ctx).getAttributes(dnsUrl, SRV_TXT_ATTR);
-            Attribute attr;
-
-            if (attrs != null && ((attr = attrs.get(SRV_TXT)) != null)) {
-                int numValues = attr.size();
-                int numRecords = 0;
-                String[] txtRecords = new String[numValues];
-
-                // gather the text records
-                int i = 0;
-                int j = 0;
-                while (i < numValues) {
-                    try {
-                        txtRecords[j] = (String)attr.get(i);
-                        j++;
-                    } catch (Exception e) {
-                        // ignore bad value
-                    }
-                    i++;
-                }
-                numRecords = j;
-
-                // trim
-                if (numRecords < numValues) {
-                    String[] trimmed = new String[numRecords];
-                    System.arraycopy(txtRecords, 0, trimmed, 0, numRecords);
-                    records = trimmed;
-                } else {
-                    records = txtRecords;
-                }
-            }
-        } catch (NamingException e) {
-            // ignore
-        }
-        return records;
+        return null;
     }
 
     /**
@@ -129,64 +81,7 @@ class KrbServiceLocator {
      *          the service has not been located.
      */
     static String[] getKerberosService(String realmName, String protocol) {
-
-        String dnsUrl = "dns:///_kerberos." + protocol + "." + realmName;
-        String[] hostports = null;
-
-        try {
-            // Create the DNS context using NamingManager rather than using
-            // the initial context constructor. This avoids having the initial
-            // context constructor call itself (when processing the URL
-            // argument in the getAttributes call).
-            Context ctx = NamingManager.getURLContext("dns", new Hashtable<>(0));
-            if (!(ctx instanceof DirContext)) {
-                return null; // cannot create a DNS context
-            }
-            Attributes attrs =
-                ((DirContext)ctx).getAttributes(dnsUrl, SRV_RR_ATTR);
-            Attribute attr;
-
-            if (attrs != null && ((attr = attrs.get(SRV_RR)) != null)) {
-                int numValues = attr.size();
-                int numRecords = 0;
-                SrvRecord[] srvRecords = new SrvRecord[numValues];
-
-                // create the service records
-                int i = 0;
-                int j = 0;
-                while (i < numValues) {
-                    try {
-                        srvRecords[j] = new SrvRecord((String) attr.get(i));
-                        j++;
-                    } catch (Exception e) {
-                        // ignore bad value
-                    }
-                    i++;
-                }
-                numRecords = j;
-
-                // trim
-                if (numRecords < numValues) {
-                    SrvRecord[] trimmed = new SrvRecord[numRecords];
-                    System.arraycopy(srvRecords, 0, trimmed, 0, numRecords);
-                    srvRecords = trimmed;
-                }
-
-                // Sort the service records in ascending order of their
-                // priority value. For records with equal priority, move
-                // those with weight 0 to the top of the list.
-                if (numRecords > 1) {
-                    Arrays.sort(srvRecords);
-                }
-
-                // extract the host and port number from each service record
-                hostports = extractHostports(srvRecords);
-            }
-        } catch (NamingException e) {
-            // e.printStackTrace();
-            // ignore
-        }
-        return hostports;
+        return null;
     }
 
     /**

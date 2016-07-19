@@ -74,8 +74,10 @@ public final class LDAPCertStoreHelper
 
     @Override
     public boolean isCausedByNetworkIssue(CertStoreException e) {
-        Throwable t = e.getCause();
-        return (t != null && (t instanceof ServiceUnavailableException ||
-                              t instanceof CommunicationException));
+        
+        //Throwable t = e.getCause();
+        //return (t != null && (t instanceof ServiceUnavailableException ||
+        //                      t instanceof CommunicationException));
+        return false;
     }
 }
